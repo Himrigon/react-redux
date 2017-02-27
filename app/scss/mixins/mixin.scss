@@ -1,0 +1,74 @@
+@mixin bg-image($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@mixin active-button {
+  color: #fff;
+  font-weight: bold;
+  background-color: #21bad9;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: #22c5e6;
+  }
+  &:active {
+    background-color: #1da4bf;
+  }
+}
+
+@mixin display-inline($align) {
+  display: inline-block;
+  vertical-align: $align;
+}
+
+@mixin vertical-center {
+  content: '';
+  height: 100%;
+  @include display-inline(middle);
+}
+
+@mixin button ($bg-color, $font-color) {
+  @include display-inline(middle);
+  padding: 18px 42px;
+  border-radius: 6px;
+  text-align: center;
+  color: $font-color;
+  font-size: $large-text;
+  background-color: $bg-color;
+  transition: .3s;
+  cursor: pointer;
+  line-height: 1em;
+  max-width: 275px;
+  &:hover {
+    background-color: lighten($bg-color, 10%);
+  }
+  @media (max-width:767px){
+    width: 90vw;
+  }
+}
+
+@mixin justify-content {
+  text-align: justify;
+  text-align-last: justify;
+  zoom: 1;
+  &:after {
+    width: 100%;
+    height: 0px;
+    visibility: hidden;
+    overflow: hidden;
+    content: '';
+    display: inline-block;
+  }
+}
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
