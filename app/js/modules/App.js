@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import NavLink from './NavLink';
+import Home from './Home'
 
 export default React.createClass({
   render() {
@@ -11,8 +12,9 @@ export default React.createClass({
         <ul role="nav">
           <li><NavLink to="/about">About</NavLink></li>
           <li><NavLink to="/repos">Repos</NavLink></li>
+
         </ul>
-        {this.props.children}
+        {this.props.children || {Home}}
       </div>
     )
   }
