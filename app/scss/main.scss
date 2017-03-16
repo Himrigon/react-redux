@@ -1,9 +1,42 @@
-@import 'common/variable.scss';
+// @import 'common/variable.scss';
 @import 'mixins/mixin.scss';
 @import 'common/grid.scss';
-@import 'common/base.scss';
+// @import 'common/base.scss';
 
 .active {
   color: green;
   border-bottom:1px solid;
 }
+body{
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+}
+header {
+  display: block;
+  height: 5vh;
+  overflow: auto;
+  background-color: orange;
+  color: brown;
+  font-size: 28px;
+}
+pre{
+  background-color: #f9f9f9;
+}
+.container-babel {
+  height: 95vh;
+  display: flex;
+}
+pre, textarea{
+  width: 50%;
+  font-family: monospace;
+  font-size: 28px;
+  margin: 0;
+  padding: 10px;
+}
+
+textarea:focus {outline: 0;}
+.example-enter {
+  opacity: 0.01;
+}
+

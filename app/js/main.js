@@ -7,6 +7,7 @@ import Repos from './modules/Repos'
 import Repo from './modules/Repo'
 import NotFound from './modules/NotFound'
 import Home from './modules/Home'
+import NewCapability from './modules/newCapability'
 
 render((
   <Router history={browserHistory}>
@@ -15,7 +16,9 @@ render((
       <Route path="/repos" component={Repos}>
         <Route path="/repos/:userName/:repoName" component={Repo}/>
       </Route>
-      <Route path="/about" component={About}/>
+      <Route path="/es6" component={About}>
+        <Route path="/es6/:newCapability" component={NewCapability}/>
+      </Route>
     </Route>
     <Route path="*" component={NotFound}/>
   </Router>
