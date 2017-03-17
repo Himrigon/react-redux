@@ -23,8 +23,10 @@ class newCapability extends React.Component{
 
 newCapability.defaultProps={
   es6:{
-    function_arrow:'a=(a)=>a',
-    spread:'let a=[3,4,5]\n\rlet b=[1,2,...a]'
+    function_arrow:'[1, 2].map(x => x * 2)',
+    spread:'let a=[3,4,5]\n\rlet b=[1,2,...a]',
+    Assignment_Destructuring:' let {foo} = pony\n\rvar {foo: baz} = pony'
+
   }
 };
 export default newCapability;

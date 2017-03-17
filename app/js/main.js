@@ -12,7 +12,7 @@ import NewCapability from './modules/newCapability'
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Home}/>
+
       <Route path="/repos" component={Repos}>
         <Route path="/repos/:userName/:repoName" component={Repo}/>
       </Route>

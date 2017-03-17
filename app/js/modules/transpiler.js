@@ -3,64 +3,73 @@ import React from 'react';
 class Transpiler extends React.Component {
     constructor(props) {
         super();
-        this.state={
-          input:'',
-          output: '',
-          err: ''
+        this.state = {
+            input: '',
+            output: '',
+            err: ''
         }
         this.handleUpdate = this.handleUpdate.bind(this);
     }
     componentDidMount() {
-      let elem = document.getElementById('text')
-      elem.value=this.props.code
-      this.update(this.props.code)
+        this.getCode(this.props.code)
     }
     componentWillReceiveProps(nextProps) {
-       let elem = document.getElementById('text')
-       elem.value=nextProps.code
-       this.update(nextProps.code)
+        this.getCode(nextProps.code)
     }
-    getCode(){
-      let elem = document.getElementById('text')
-      elem.value=this.props.code
-      this.update(this.props.code)
+    getCode(code) {
+        let elem = document.getElementById('text')
+        elem.value = code
+        this.update(code)
+        this.cnsole(this.state.output)
     }
-    update(code){
-      try {
-          this.setState({
-            output: babel.transform(code,{
-              stage:0,
-              loose:'all'
-            }).code,
-            err: ''
-          })
+
+    update(code) {
+        try {
+            this.setState({
+                output: babel.transform(code, {
+                    stage: 0,
+                    loose: 'all'
+                }).code,
+                err: ''
+            })
+        } catch (err) {
+            this.setState({ err: err.message })
         }
-        catch(err){
-          this.setState({err:err.message})
+    }
+
+    handleUpdate(e) {
+        let code = e.target.value;
+        this.getCode(code)
+    }
+
+    cnsole(msg) {
+        const logger = document.getElementById('console');
+        logger.innerHTML=""
+        console.clear()
+        try {
+              console.log(eval(msg));
+              let message = eval(msg)
+              if (typeof message == 'object') {
+                  logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
+              } else {
+                  logger.innerHTML += message + '<br />';
+              }
+          } catch (e) {
+            console.log(e)
         }
+
     }
-    handleUpdate(e){
-      let code = e.target.value;
-      this.update(code)
-    }
+
+
     render() {
-        return (
-          <div>
-            <header>{this.state.err}</header>
-            <div className="container">
-              <textarea
-                id="text"
-                onChange={this.handleUpdate}
-                defaultValue={this.state.input}>
-              </textarea>
-              <pre>
-              {this.state.output}
-                </pre>
-            </div>
-          </div>
-          )
+        return ( < div >
+            < header > { this.state.err } < /header> < div className = "container" >
+            < textarea id = "text"
+            onChange = { this.handleUpdate }
+            defaultValue = { this.state.input } >
+            < /textarea> < pre > { this.state.output } < /pre> < /div> < /div>
+        )
     }
 }
 
 export default Transpiler;
-
