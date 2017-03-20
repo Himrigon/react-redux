@@ -12,13 +12,13 @@ import NewCapability from './modules/newCapability'
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-
-      <Route path="/repos" component={Repos}>
-        <Route path="/repos/:userName/:repoName" component={Repo}/>
-      </Route>
       <Route path="/es6" component={About}>
         <Route path="/es6/:newCapability" component={NewCapability}/>
       </Route>
+      <Route path="/repos" component={Repos}>
+        <Route path="/repos/:userName/:repoName" component={Repo}/>
+      </Route>
+
     </Route>
     <Route path="*" component={NotFound}/>
   </Router>

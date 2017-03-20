@@ -8,7 +8,7 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <h1>ES6</h1>
+        <h1 className="rout-title">ES6</h1>
         <ul role="nav">
           <li><NavLink to="/es6">ES6</NavLink></li>
           <li><NavLink to="/repos">Redux</NavLink></li>

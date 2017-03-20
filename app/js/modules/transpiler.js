@@ -20,7 +20,7 @@ class Transpiler extends React.Component {
         let elem = document.getElementById('text')
         elem.value = code
         this.update(code)
-        this.cnsole(this.state.output)
+        this.console(this.state.output)
     }
 
     update(code) {
@@ -42,12 +42,12 @@ class Transpiler extends React.Component {
         this.getCode(code)
     }
 
-    cnsole(msg) {
+    console(msg) {
         const logger = document.getElementById('console');
         logger.innerHTML=""
         console.clear()
         try {
-              console.log(eval(msg));
+              console.log(eval(msg)         );
               let message = eval(msg)
               if (typeof message == 'object') {
                   logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
