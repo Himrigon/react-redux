@@ -14,7 +14,6 @@ class newCapability extends React.Component{
   render() {
     return (
       <div className="transpiler-container">
-        <h2>{this.setCapabiity(this.props.params.newCapability)}</h2>
         <Transpiler code={this.setCapabiity(this.props.params.newCapability)}/>
       </div>
     )

@@ -62,12 +62,19 @@ class Transpiler extends React.Component {
 
 
     render() {
-        return ( < div >
-            < header > { this.state.err } < /header> < div className = "container" >
-            < textarea id = "text"
-            onChange = { this.handleUpdate }
-            defaultValue = { this.state.input } >
-            < /textarea> < pre > { this.state.output } < /pre> < /div> < /div>
+        return (
+            <div>
+              <div className="header"> { this.state.err } </div>
+              <div className = "container" >
+                <textarea id = "text"
+                onChange = { this.handleUpdate }
+                defaultValue = { this.state.input } >
+                </textarea>
+                <pre> { this.state.output } </pre>
+              </div>
+              <div id="console"></div>
+            </div>
+
         )
     }
 }
