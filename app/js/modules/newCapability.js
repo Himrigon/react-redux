@@ -25,8 +25,15 @@ newCapability.defaultProps={
     _let:'let a = 2 \n\r{let a = 3\n\r a}\n\r a ',
     _const: 'const ARR = [5, 6];\n\rARR',
     function_arrow:'[1, 2].map(x => x * 2)',
-    spread:'let a=[3,4,5]\n\rlet b=[1,2,...a]',
-    Assignment_Destructuring:' let {foo} = pony\n\rvar {foo: baz} = pony'
+    spread:'let a=[3,4,5]\n\r//let b=[1,2,...a]',
+    strings:'',
+    ObjectPrototypes:'',
+    SetMap:'',
+    Generators:'',
+    Promise:'',
+    Modules:'',
+    Proxy:'',
+    Assignment_Destructuring:' let {foo} = pony\nvar {foo: baz} = pony'
 
   }
 };
