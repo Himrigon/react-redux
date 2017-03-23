@@ -47,7 +47,6 @@ class Transpiler extends React.Component {
         logger.innerHTML=""
         console.clear()
         try {
-              console.log(eval(msg)         );
               let message = eval(msg)
               if (typeof message == 'object') {
                   logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';

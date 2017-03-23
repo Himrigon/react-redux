@@ -51,6 +51,7 @@ textarea {
   padding: 1vh 3vh;
   overflow-x: auto;
   border: none;
+  color:#333;
 }
 
 textarea {
@@ -71,6 +72,7 @@ textarea:focus {
   height: 10vh;
   left: 0;
   bottom: 0;
+  color:orange;
   background-color: #f5f5f5;
   font-size: 24px;
   padding: 1vh 4vh;
