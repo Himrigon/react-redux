@@ -22,7 +22,11 @@ class newCapability extends React.Component{
 
 newCapability.defaultProps={
   es6:{
-    _let:'let a = 2\n\r{\n let a = 3\n a\n}',
+    _let:
+`let a = 2
+{
+  let a = 3
+}`,
     _const: 'const ARR = [5, 6];\n\rARR',
     function_arrow:
 `
@@ -44,15 +48,87 @@ let b = [1, 2].map(x => x * 2);
 
 
 // setTimeout(() => console.log(timer.seconds), 3100);`,
-    spread:'let a=[3,4,5]\n\r//let b=[1,2,...a]',
-    strings:'',
-    ObjectPrototypes:'',
+    spread:
+`let a=[3,4,5]
+//let b=[1,2,...a]
+let [firstName, lastName, ...rest] = "Сегезмунд Полиграфович Неактив-Болотский Вылазец".split(" ");
+`,
+    strings:
+`
+'//Blue Whale'.includes('blue');
+'//To be, or not to be, that is the question.'.endsWith('question.');
+'//To be, or not to be, that is the question.'.startWith('To');
+//'abc'.repeat(2);
+`,
+   ObjectPrototypes:
+`
+let name = 'Филимон';
+let surname = 'surname'
+let gender = () => 'gender'
+let user={
+  name,
+  [surname]:'Уржумский',
+  [gender()]:'mail'
+}
+
+let user2={
+  name: 'Венеамин',
+  adress:'Утопская площадь 2б стр.4',
+  zip: 1111
+}
+`,
+    Classes:
+`
+class User {
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  sayHi() {
+   alert(this.name)
+  }
+
+}
+
+let user = new User("Вася");
+
+class ChildUser extends User{
+  sayHi(){
+    super.sayHi()
+    return 'from ChilDuser'
+  }
+}
+
+new ChildUser('Петя');
+`,
+Symbol:
+`
+let sym = Symbol("name");
+sym.toString();
+// Symbol("name") == Symbol("name")
+//let user = {
+//  isAdmin: 'Admin',
+//  name: "Вася",
+//  age: 30,
+//  [Symbol.for("isAdmin")]: true
+//};
+//Object.keys(user)
+//user[Symbol.for("isAdmin")]
+`,
     SetMap:'',
     Generators:'',
     Promise:'',
     Modules:'',
     Proxy:'',
-    Assignment_Destructuring:'let a = {\n foo: 24,\n height:2\n};\n\rlet {foo:b,height} = a;'
+    Assignment_Destructuring:
+`let a = {
+  foo: 24,
+  height:2
+};
+let { foo:b, height } = a;
+let [firstName="Гость", lastName="Анонимный"] = [];
+`
 
   }
 };

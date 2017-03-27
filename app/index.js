@@ -169,8 +169,8 @@ exports.default = _react2.default.createClass({
           { className: 'menu-list__item' },
           _react2.default.createElement(
             _NavLink2.default,
-            { to: '/es6/function_arrow' },
-            'Function'
+            { to: '/es6/Assignment_Destructuring' },
+            'Assignment Destructuring'
           )
         ),
         _react2.default.createElement(
@@ -178,8 +178,8 @@ exports.default = _react2.default.createClass({
           { className: 'menu-list__item' },
           _react2.default.createElement(
             _NavLink2.default,
-            { to: '/es6/Assignment_Destructuring' },
-            'Assignment Destructuring'
+            { to: '/es6/function_arrow' },
+            'Function'
           )
         ),
         _react2.default.createElement(
@@ -205,7 +205,7 @@ exports.default = _react2.default.createClass({
           { className: 'menu-list__item' },
           _react2.default.createElement(
             _NavLink2.default,
-            { to: '/es6/Object&prototypes' },
+            { to: '/es6/ObjectPrototypes' },
             'Object and prototypes'
           )
         ),
@@ -214,7 +214,7 @@ exports.default = _react2.default.createClass({
           { className: 'menu-list__item' },
           _react2.default.createElement(
             _NavLink2.default,
-            { to: '/es6/ObjectPrototypes' },
+            { to: '/es6/Classes' },
             'Classes'
           )
         ),
@@ -536,18 +536,20 @@ var newCapability = function (_React$Component) {
 
 newCapability.defaultProps = {
   es6: {
-    _let: 'let a = 2\n\r{\n let a = 3\n a\n}',
+    _let: 'let a = 2\n{\n  let a = 3\n}',
     _const: 'const ARR = [5, 6];\n\rARR',
     function_arrow: '\nfunction showMenu({title="\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A", width:w=100, height:h=200} = {}) {\n  return(title + \' \' + w + \' \' + h);\n}\n\nlet a = showMenu()\n\n\nlet b = [1, 2].map(x => x * 2);\n\n function Timer () {\n  this.seconds = 0\n  setInterval(() => this.seconds++, 1000)\n };\n\n var timer = new Timer();\n\n\n// setTimeout(() => console.log(timer.seconds), 3100);',
-    spread: 'let a=[3,4,5]\n\r//let b=[1,2,...a]',
-    strings: '',
-    ObjectPrototypes: '',
+    spread: 'let a=[3,4,5]\n//let b=[1,2,...a]\nlet [firstName, lastName, ...rest] = "\u0421\u0435\u0433\u0435\u0437\u043C\u0443\u043D\u0434 \u041F\u043E\u043B\u0438\u0433\u0440\u0430\u0444\u043E\u0432\u0438\u0447 \u041D\u0435\u0430\u043A\u0442\u0438\u0432-\u0411\u043E\u043B\u043E\u0442\u0441\u043A\u0438\u0439 \u0412\u044B\u043B\u0430\u0437\u0435\u0446".split(" ");\n',
+    strings: '\n\'//Blue Whale\'.includes(\'blue\');\n\'//To be, or not to be, that is the question.\'.endsWith(\'question.\');\n\'//To be, or not to be, that is the question.\'.startWith(\'To\');\n//\'abc\'.repeat(2);\n',
+    ObjectPrototypes: '\nlet name = \'\u0424\u0438\u043B\u0438\u043C\u043E\u043D\';\nlet surname = \'surname\'\nlet gender = () => \'gender\'\nlet user={\n  name,\n  [surname]:\'\u0423\u0440\u0436\u0443\u043C\u0441\u043A\u0438\u0439\',\n  [gender()]:\'mail\'\n}\n\nlet user2={\n  name: \'\u0412\u0435\u043D\u0435\u0430\u043C\u0438\u043D\',\n  adress:\'\u0423\u0442\u043E\u043F\u0441\u043A\u0430\u044F \u043F\u043B\u043E\u0449\u0430\u0434\u044C 2\u0431 \u0441\u0442\u0440.4\',\n  zip: 1111\n}\n',
+    Classes: '\nclass User {\n\n  constructor(name) {\n    this.name = name;\n  }\n\n  sayHi() {\n   alert(this.name)\n  }\n\n}\n\nlet user = new User("\u0412\u0430\u0441\u044F");\n\nclass ChildUser extends User{\n  sayHi(){\n    super.sayHi()\n    return \'from ChilDuser\'\n  }\n}\n\nnew ChildUser(\'\u041F\u0435\u0442\u044F\');\n',
+    Symbol: '\nlet sym = Symbol("name");\nsym.toString();\n// Symbol("name") == Symbol("name")\n//let user = {\n//  isAdmin: \'Admin\',\n//  name: "\u0412\u0430\u0441\u044F",\n//  age: 30,\n//  [Symbol.for("isAdmin")]: true\n//};\n//Object.keys(user)\n//user[Symbol.for("isAdmin")]\n',
     SetMap: '',
     Generators: '',
     Promise: '',
     Modules: '',
     Proxy: '',
-    Assignment_Destructuring: 'let a = {\n foo: 24,\n height:2\n};\n\rlet {foo:b,height} = a;'
+    Assignment_Destructuring: 'let a = {\n  foo: 24,\n  height:2\n};\nlet { foo:b, height } = a;\nlet [firstName="\u0413\u043E\u0441\u0442\u044C", lastName="\u0410\u043D\u043E\u043D\u0438\u043C\u043D\u044B\u0439"] = [];\n'
 
   }
 };
