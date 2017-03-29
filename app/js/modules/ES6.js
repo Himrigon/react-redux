@@ -15,7 +15,7 @@ export default React.createClass({
           <li className="menu-list__item"><NavLink to="/es6/ObjectPrototypes">Object and prototypes</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/Classes">Classes</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/Symbol">Symbol</NavLink></li>
-          <li className="menu-list__item"><NavLink to="/es6/SetMap">Set, Map, WeakSet и WeakMap</NavLink></li>
+          <li className="menu-list__item"><NavLink to="/es6/SetMap">Map WeakMap</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/Promise">Promise</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/Genrators">Generators</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/Modules">Modules</NavLink></li>

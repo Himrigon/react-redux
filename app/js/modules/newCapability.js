@@ -39,15 +39,19 @@ let a = showMenu()
 
 let b = [1, 2].map(x => x * 2);
 
- function Timer () {
-  this.seconds = 0
-  setInterval(() => this.seconds++, 1000)
- };
+let group = {
+  title: "Наш курс",
+  students: ["Вася", "Петя", "Даша"],
 
- var timer = new Timer();
+  showList: function() {
+    this.students.forEach(
+      student => alert(this.title + ': ' + student)
+    )
+  }
+}
 
-
-// setTimeout(() => console.log(timer.seconds), 3100);`,
+group.showList();`
+,
     spread:
 `let a=[3,4,5]
 //let b=[1,2,...a]
@@ -116,9 +120,54 @@ sym.toString();
 //Object.keys(user)
 //user[Symbol.for("isAdmin")]
 `,
-    SetMap:'',
+    SetMap:
+`
+let map = new Map();
+
+map.set('1', 'str1')
+   .set(1, 'num1')
+   .set(true, 'bool1');
+
+for (let keys of map.keys()){
+  //alert keys
+}
+for (let values of map.keys()){
+   //alert values
+}
+for (let entries of map.keys()){
+   //alert entries
+}
+// map.delete(true)
+
+let fruit = [
+  {name: 'orange'},
+  {name: 'apple'},
+  {name: 'pineapple'}
+]
+let weakMap = new WeakMap();
+
+weakMap[fruit[1]] = 'green';
+`,
     Generators:'',
-    Promise:'',
+    Promise:
+`
+let promise = new Promise((resolve, reject) => {
+
+  setTimeout(() => {
+    resolve("result");
+  }, 1000);
+});
+
+promise
+  .then(
+    result => {
+      alert("Fulfilled: " + result);
+    },
+    error => {
+      alert("Rejected: " + error); // error - аргумент reject
+    }
+  );
+`,
     Modules:'',
     Proxy:'',
     Assignment_Destructuring:
