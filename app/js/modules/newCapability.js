@@ -45,7 +45,7 @@ let group = {
 
   showList: function() {
     this.students.forEach(
-      student => alert(this.title + ': ' + student)
+      student => console.log(this.title + ': ' + student)
     )
   }
 }
@@ -90,7 +90,7 @@ class User {
   }
 
   sayHi() {
-   alert(this.name)
+   console.log(this.name)
   }
 
 }
@@ -129,13 +129,13 @@ map.set('1', 'str1')
    .set(true, 'bool1');
 
 for (let keys of map.keys()){
-  //alert keys
+  //console.log keys
 }
 for (let values of map.keys()){
-   //alert values
+   //console.log values
 }
 for (let entries of map.keys()){
-   //alert entries
+   //console.log entries
 }
 // map.delete(true)
 
@@ -161,10 +161,10 @@ let promise = new Promise((resolve, reject) => {
 promise
   .then(
     result => {
-      alert("Fulfilled: " + result);
+      console.log("Fulfilled: " + result);
     },
     error => {
-      alert("Rejected: " + error); // error - аргумент reject
+      console.log("Rejected: " + error); // error - аргумент reject
     }
   );
 `,

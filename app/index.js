@@ -538,16 +538,16 @@ newCapability.defaultProps = {
   es6: {
     _let: 'let a = 2\n{\n  let a = 3\n}',
     _const: 'const ARR = [5, 6];\n\rARR',
-    function_arrow: '\nfunction showMenu({title="\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A", width:w=100, height:h=200} = {}) {\n  return(title + \' \' + w + \' \' + h);\n}\n\nlet a = showMenu()\n\n\nlet b = [1, 2].map(x => x * 2);\n\nlet group = {\n  title: "\u041D\u0430\u0448 \u043A\u0443\u0440\u0441",\n  students: ["\u0412\u0430\u0441\u044F", "\u041F\u0435\u0442\u044F", "\u0414\u0430\u0448\u0430"],\n\n  showList: function() {\n    this.students.forEach(\n      student => alert(this.title + \': \' + student)\n    )\n  }\n}\n\ngroup.showList();',
+    function_arrow: '\nfunction showMenu({title="\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A", width:w=100, height:h=200} = {}) {\n  return(title + \' \' + w + \' \' + h);\n}\n\nlet a = showMenu()\n\n\nlet b = [1, 2].map(x => x * 2);\n\nlet group = {\n  title: "\u041D\u0430\u0448 \u043A\u0443\u0440\u0441",\n  students: ["\u0412\u0430\u0441\u044F", "\u041F\u0435\u0442\u044F", "\u0414\u0430\u0448\u0430"],\n\n  showList: function() {\n    this.students.forEach(\n      student => console.log(this.title + \': \' + student)\n    )\n  }\n}\n\ngroup.showList();',
 
     spread: 'let a=[3,4,5]\n//let b=[1,2,...a]\nlet [firstName, lastName, ...rest] = "\u0421\u0435\u0433\u0435\u0437\u043C\u0443\u043D\u0434 \u041F\u043E\u043B\u0438\u0433\u0440\u0430\u0444\u043E\u0432\u0438\u0447 \u041D\u0435\u0430\u043A\u0442\u0438\u0432-\u0411\u043E\u043B\u043E\u0442\u0441\u043A\u0438\u0439 \u0412\u044B\u043B\u0430\u0437\u0435\u0446".split(" ");\n',
     strings: '\n\'//Blue Whale\'.includes(\'blue\');\n\'//To be, or not to be, that is the question.\'.endsWith(\'question.\');\n\'//To be, or not to be, that is the question.\'.startWith(\'To\');\n//\'abc\'.repeat(2);\n',
     ObjectPrototypes: '\nlet name = \'\u0424\u0438\u043B\u0438\u043C\u043E\u043D\';\nlet surname = \'surname\'\nlet gender = () => \'gender\'\nlet user={\n  name,\n  [surname]:\'\u0423\u0440\u0436\u0443\u043C\u0441\u043A\u0438\u0439\',\n  [gender()]:\'mail\'\n}\n\nlet user2={\n  name: \'\u0412\u0435\u043D\u0435\u0430\u043C\u0438\u043D\',\n  adress:\'\u0423\u0442\u043E\u043F\u0441\u043A\u0430\u044F \u043F\u043B\u043E\u0449\u0430\u0434\u044C 2\u0431 \u0441\u0442\u0440.4\',\n  zip: 1111\n}\n',
-    Classes: '\nclass User {\n\n  constructor(name) {\n    this.name = name;\n  }\n\n  sayHi() {\n   alert(this.name)\n  }\n\n}\n\nlet user = new User("\u0412\u0430\u0441\u044F");\n\nclass ChildUser extends User{\n  sayHi(){\n    super.sayHi()\n    return \'from ChilDuser\'\n  }\n}\n\nnew ChildUser(\'\u041F\u0435\u0442\u044F\');\n',
+    Classes: '\nclass User {\n\n  constructor(name) {\n    this.name = name;\n  }\n\n  sayHi() {\n   console.log(this.name)\n  }\n\n}\n\nlet user = new User("\u0412\u0430\u0441\u044F");\n\nclass ChildUser extends User{\n  sayHi(){\n    super.sayHi()\n    return \'from ChilDuser\'\n  }\n}\n\nnew ChildUser(\'\u041F\u0435\u0442\u044F\');\n',
     Symbol: '\nlet sym = Symbol("name");\nsym.toString();\n// Symbol("name") == Symbol("name")\n//let user = {\n//  isAdmin: \'Admin\',\n//  name: "\u0412\u0430\u0441\u044F",\n//  age: 30,\n//  [Symbol.for("isAdmin")]: true\n//};\n//Object.keys(user)\n//user[Symbol.for("isAdmin")]\n',
-    SetMap: '\nlet map = new Map();\n\nmap.set(\'1\', \'str1\')\n   .set(1, \'num1\')\n   .set(true, \'bool1\');\n\nfor (let keys of map.keys()){\n  //alert keys\n}\nfor (let values of map.keys()){\n   //alert values\n}\nfor (let entries of map.keys()){\n   //alert entries\n}\n// map.delete(true)\n\nlet fruit = [\n  {name: \'orange\'},\n  {name: \'apple\'},\n  {name: \'pineapple\'}\n]\nlet weakMap = new WeakMap();\n\nweakMap[fruit[1]] = \'green\';\n',
+    SetMap: '\nlet map = new Map();\n\nmap.set(\'1\', \'str1\')\n   .set(1, \'num1\')\n   .set(true, \'bool1\');\n\nfor (let keys of map.keys()){\n  //console.log keys\n}\nfor (let values of map.keys()){\n   //console.log values\n}\nfor (let entries of map.keys()){\n   //console.log entries\n}\n// map.delete(true)\n\nlet fruit = [\n  {name: \'orange\'},\n  {name: \'apple\'},\n  {name: \'pineapple\'}\n]\nlet weakMap = new WeakMap();\n\nweakMap[fruit[1]] = \'green\';\n',
     Generators: '',
-    Promise: '\nlet promise = new Promise((resolve, reject) => {\n\n  setTimeout(() => {\n    resolve("result");\n  }, 1000);\n});\n\npromise\n  .then(\n    result => {\n      alert("Fulfilled: " + result);\n    },\n    error => {\n      alert("Rejected: " + error); // error - \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442 reject\n    }\n  );\n',
+    Promise: '\nlet promise = new Promise((resolve, reject) => {\n\n  setTimeout(() => {\n    resolve("result");\n  }, 1000);\n});\n\npromise\n  .then(\n    result => {\n      console.log("Fulfilled: " + result);\n    },\n    error => {\n      console.log("Rejected: " + error); // error - \u0430\u0440\u0433\u0443\u043C\u0435\u043D\u0442 reject\n    }\n  );\n',
     Modules: '',
     Proxy: '',
     Assignment_Destructuring: 'let a = {\n  foo: 24,\n  height:2\n};\nlet { foo:b, height } = a;\nlet [firstName="\u0413\u043E\u0441\u0442\u044C", lastName="\u0410\u043D\u043E\u043D\u0438\u043C\u043D\u044B\u0439"] = [];\n'
@@ -562,8 +562,6 @@ exports.default = newCapability;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -648,18 +646,11 @@ var Transpiler = function (_React$Component) {
 
             return console;
         }(function (msg) {
-            var logger = document.getElementById('console');
-            logger.innerHTML = "";
             console.clear();
             try {
-                var message = eval(msg);
-                if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) == 'object') {
-                    logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
-                } else {
-                    logger.innerHTML += message + '<br />';
-                }
+                eval(msg);
             } catch (e) {
-                console.log(e);
+                console.log(e.message);
             }
         })
     }, {
@@ -688,8 +679,7 @@ var Transpiler = function (_React$Component) {
                         this.state.output,
                         ' '
                     )
-                ),
-                _react2.default.createElement('div', { id: 'console' })
+                )
             );
         }
     }]);

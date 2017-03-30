@@ -43,18 +43,12 @@ class Transpiler extends React.Component {
     }
 
     console(msg) {
-        const logger = document.getElementById('console');
-        logger.innerHTML=""
         console.clear()
         try {
-              let message = eval(msg)
-              if (typeof message == 'object') {
-                  logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
-              } else {
-                  logger.innerHTML += message + '<br />';
-              }
+           eval(msg)
+
           } catch (e) {
-            console.log(e)
+            console.log(e.message)
         }
 
     }
@@ -71,7 +65,7 @@ class Transpiler extends React.Component {
                 </textarea>
                 <pre> { this.state.output } </pre>
               </div>
-              <div id="console"></div>
+
             </div>
 
         )
