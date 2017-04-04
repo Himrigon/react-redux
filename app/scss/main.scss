@@ -41,20 +41,20 @@ pre {
 }
 
 pre,
-textarea,
 .CodeMirror{
-  float: left;
-  height: 61vh;
-  width: 50%;
   font-family: monospace;
   font-size: 24px;
   margin: 0;
-  padding: 1vh 3vh;
   overflow-x: auto;
   border: none;
   color:#333;
 }
-
+.inner,
+.outter{
+  float: left;
+  width: 50%;
+  height: 600px;
+}
 textarea {
   resize: none;
   border-right: 1px solid #ddd;

@@ -24,9 +24,7 @@ newCapability.defaultProps={
   es6:{
     _let:
 `let a = 2
-{
-  let a = 3
-}`,
+ {let a = 3}`,
     _const: 'const ARR = [5, 6];\n\rARR',
     function_arrow:
 `

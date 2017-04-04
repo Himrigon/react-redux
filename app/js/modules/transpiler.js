@@ -3,36 +3,6 @@ var CodeMirror = require('react-codemirror');
 require('codemirror/mode/javascript/javascript');
 
 
-
-
-var App = React.createClass({
-  getInitialState: function() {
-    return {
-      code: this.props.code,
-    };
-  },
-  updateCode: function(newCode) {
-    this.setState({
-      code: newCode,
-    });
-  },
-
-  componentWillReceiveProps: function(nextProps) {
-        this.updateCode(nextProps.code);
-    },
-
-  render: function() {
-    return <CodeMirror
-              value={this.state.code}
-              onChange={this.updateCode}
-              options={{
-                mode: 'javascript',
-                lineNumbers: true,
-                smartIndent: true,
-                tabSize:2}} />
-  }
-});
-
 class Transpiler extends React.Component {
     constructor(props) {
         super();
@@ -42,19 +12,14 @@ class Transpiler extends React.Component {
             err: '',
             code:''
         }
-        this.handleUpdate = this.handleUpdate.bind(this);
+        this.update = this.update.bind(this);
+        this.updateCode = this.updateCode.bind(this);
     }
     componentDidMount() {
-        this.getCode(this.props.code)
+        this.updateCode(this.props.code)
     }
     componentWillReceiveProps(nextProps) {
-        this.getCode(nextProps.code)
-    }
-    getCode(code) {
-        let elem = document.getElementById('text')
-        elem.value = code
-        this.update(code)
-        this.console(this.state.output)
+        this.updateCode(nextProps.code)
     }
 
     update(code) {
@@ -64,18 +29,26 @@ class Transpiler extends React.Component {
                     stage: 0,
                     loose: 'all'
                 }).code,
-                err: '',
-                code: code
+                err: ''
             })
         } catch (err) {
             this.setState({ err: err.message })
         }
     }
 
-    handleUpdate(e) {
-        let code = e.target.value;
-        this.getCode(code)
+    updateCode(newCode) {
+      this.setState({
+        code: newCode,
+      });
     }
+
+    babel(){
+      return (e)=>{
+        this.update(this.state.code);
+        this.console(this.state.output)
+      }
+    }
+
 
     console(msg) {
         console.clear()
@@ -89,15 +62,32 @@ class Transpiler extends React.Component {
     render() {
         return (
             <div>
-              <div className="header"> { this.state.err } </div>
-              <App code={this.state.code}/>
-              <div className = "container" >
-                <textarea id = "text"
-                onChange = { this.handleUpdate }
-                defaultValue = { this.state.input } >
-                </textarea>
-                <pre> { this.state.output } </pre>
+              <div className="header"> { this.state.err }  <button onClick={this.babel()}>run</button></div>
+              <div className="inner">
+              <CodeMirror
+              value={this.state.code}
+              onChange={this.updateCode}
+              options={{
+                mode: 'javascript',
+                lineNumbers: true,
+                lineWrapping: true,
+                smartIndent: true,
+                tabSize:2
+              }} />
               </div>
+              <div className="outter">
+              <CodeMirror
+              value={this.state.output}
+              options={{
+                mode: 'javascript',
+                lineNumbers: true,
+                lineWrapping: true,
+                smartIndent: true,
+                tabSize:2
+              }} />
+              </div>
+
+
 
             </div>
 

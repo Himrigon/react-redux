@@ -536,7 +536,7 @@ var newCapability = function (_React$Component) {
 
 newCapability.defaultProps = {
   es6: {
-    _let: 'let a = 2\n{\n  let a = 3\n}',
+    _let: 'let a = 2\n {let a = 3}',
     _const: 'const ARR = [5, 6];\n\rARR',
     function_arrow: '\nfunction showMenu({title="\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A", width:w=100, height:h=200} = {}) {\n  return(title + \' \' + w + \' \' + h);\n}\n\nlet a = showMenu()\n\n\nlet b = [1, 2].map(x => x * 2);\n\nlet group = {\n  title: "\u041D\u0430\u0448 \u043A\u0443\u0440\u0441",\n  students: ["\u0412\u0430\u0441\u044F", "\u041F\u0435\u0442\u044F", "\u0414\u0430\u0448\u0430"],\n\n  showList: function() {\n    this.students.forEach(\n      student => console.log(this.title + \': \' + student)\n    )\n  }\n}\n\ngroup.showList();',
 
@@ -560,7 +560,7 @@ exports.default = newCapability;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -581,146 +581,195 @@ var CodeMirror = require('react-codemirror');
 require('codemirror/mode/javascript/javascript');
 
 var App = _react2.default.createClass({
-    displayName: 'App',
+  displayName: 'App',
 
-    getInitialState: function getInitialState() {
-        return {
-            code: this.props.code
-        };
-    },
-    updateCode: function updateCode(newCode) {
-        this.setState({
-            code: newCode
-        });
-    },
+  getInitialState: function getInitialState() {
+    return {
+      code: this.props.code
+    };
+  },
+  updateCode: function updateCode(newCode) {
+    this.setState({
+      code: newCode
+    });
+  },
 
-    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-        this.updateCode(nextProps.code);
-    },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.updateCode(nextProps.code);
+  },
 
-    render: function render() {
-        return _react2.default.createElement(CodeMirror, {
-            value: this.state.code,
-            onChange: this.updateCode,
-            options: {
-                mode: 'javascript',
-                lineNumbers: true,
-                smartIndent: true,
-                tabSize: 2 } });
-    }
+  render: function render() {
+    return _react2.default.createElement(CodeMirror, {
+      value: this.state.code,
+      onChange: this.updateCode,
+      options: {
+        mode: 'javascript',
+        lineNumbers: true,
+        lineWrapping: true,
+        smartIndent: true,
+        tabSize: 2
+      } });
+  }
+});
+var App2 = _react2.default.createClass({
+  displayName: 'App2',
+
+  getInitialState: function getInitialState() {
+    return {
+      code: this.props.code
+    };
+  },
+  updateCode: function updateCode(newCode) {
+    this.setState({
+      code: newCode
+    });
+  },
+
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.updateCode(nextProps.code);
+  },
+
+  render: function render() {
+    return _react2.default.createElement(CodeMirror, {
+      value: this.state.code,
+      onChange: this.updateCode,
+      options: {
+        mode: 'javascript',
+        lineNumbers: true,
+        lineWrapping: true,
+        smartIndent: true,
+        tabSize: 2
+      } });
+  }
 });
 
 var Transpiler = function (_React$Component) {
-    _inherits(Transpiler, _React$Component);
+  _inherits(Transpiler, _React$Component);
 
-    function Transpiler(props) {
-        _classCallCheck(this, Transpiler);
+  function Transpiler(props) {
+    _classCallCheck(this, Transpiler);
 
-        var _this = _possibleConstructorReturn(this, (Transpiler.__proto__ || Object.getPrototypeOf(Transpiler)).call(this));
+    var _this = _possibleConstructorReturn(this, (Transpiler.__proto__ || Object.getPrototypeOf(Transpiler)).call(this));
 
-        _this.state = {
-            input: '',
-            output: '',
-            err: '',
-            code: ''
-        };
-        _this.handleUpdate = _this.handleUpdate.bind(_this);
-        return _this;
+    _this.state = {
+      input: '',
+      output: '',
+      err: '',
+      code: ''
+    };
+    _this.update = _this.update.bind(_this);
+    _this.updateCode = _this.updateCode.bind(_this);
+    return _this;
+  }
+
+  _createClass(Transpiler, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.updateCode(this.props.code);
     }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.updateCode(nextProps.code);
+    }
+  }, {
+    key: 'update',
+    value: function update(code) {
+      try {
+        this.setState({
+          output: babel.transform(code, {
+            stage: 0,
+            loose: 'all'
+          }).code,
+          err: ''
+        });
+      } catch (err) {
+        this.setState({ err: err.message });
+      }
+    }
+  }, {
+    key: 'updateCode',
+    value: function updateCode(newCode) {
+      this.setState({
+        code: newCode
+      });
+    }
+  }, {
+    key: 'babel',
+    value: function babel() {
+      var _this2 = this;
 
-    _createClass(Transpiler, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.getCode(this.props.code);
-        }
-    }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.getCode(nextProps.code);
-        }
-    }, {
-        key: 'getCode',
-        value: function getCode(code) {
-            var elem = document.getElementById('text');
-            elem.value = code;
-            this.update(code);
-            this.console(this.state.output);
-        }
-    }, {
-        key: 'update',
-        value: function update(code) {
-            try {
-                this.setState({
-                    output: babel.transform(code, {
-                        stage: 0,
-                        loose: 'all'
-                    }).code,
-                    err: '',
-                    code: code
-                });
-            } catch (err) {
-                this.setState({ err: err.message });
-            }
-        }
-    }, {
-        key: 'handleUpdate',
-        value: function handleUpdate(e) {
-            var code = e.target.value;
-            this.getCode(code);
-        }
-    }, {
-        key: 'console',
-        value: function (_console) {
-            function console(_x) {
-                return _console.apply(this, arguments);
-            }
+      return function (e) {
+        _this2.update(_this2.state.code);
+        _this2.console(_this2.state.output);
+      };
+    }
+  }, {
+    key: 'console',
+    value: function (_console) {
+      function console(_x) {
+        return _console.apply(this, arguments);
+      }
 
-            console.toString = function () {
-                return _console.toString();
-            };
+      console.toString = function () {
+        return _console.toString();
+      };
 
-            return console;
-        }(function (msg) {
-            console.clear();
-            try {
-                eval(msg);
-            } catch (e) {
-                console.log(e.message);
-            }
-        })
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'div',
-                    { className: 'header' },
-                    ' ',
-                    this.state.err,
-                    ' '
-                ),
-                _react2.default.createElement(App, { code: this.state.code }),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'container' },
-                    _react2.default.createElement('textarea', { id: 'text',
-                        onChange: this.handleUpdate,
-                        defaultValue: this.state.input }),
-                    _react2.default.createElement(
-                        'pre',
-                        null,
-                        ' ',
-                        this.state.output,
-                        ' '
-                    )
-                )
-            );
-        }
-    }]);
+      return console;
+    }(function (msg) {
+      console.clear();
+      try {
+        eval(msg);
+      } catch (e) {
+        console.log(e.message);
+      }
+    })
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'header' },
+          ' ',
+          this.state.err,
+          '  ',
+          _react2.default.createElement('button', { onClick: this.babel() })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'inner' },
+          _react2.default.createElement(CodeMirror, {
+            value: this.state.code,
+            onChange: this.updateCode,
+            options: {
+              mode: 'javascript',
+              lineNumbers: true,
+              lineWrapping: true,
+              smartIndent: true,
+              tabSize: 2
+            } })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'outter' },
+          _react2.default.createElement(CodeMirror, {
+            value: this.state.output,
+            options: {
+              mode: 'javascript',
+              lineNumbers: true,
+              lineWrapping: true,
+              smartIndent: true,
+              tabSize: 2
+            } })
+        )
+      );
+    }
+  }]);
 
-    return Transpiler;
+  return Transpiler;
 }(_react2.default.Component);
 
 exports.default = Transpiler;
