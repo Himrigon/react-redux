@@ -1,4 +1,37 @@
 import React from 'react';
+var CodeMirror = require('react-codemirror');
+require('codemirror/mode/javascript/javascript');
+
+
+
+
+var App = React.createClass({
+  getInitialState: function() {
+    return {
+      code: this.props.code,
+    };
+  },
+  updateCode: function(newCode) {
+    this.setState({
+      code: newCode,
+    });
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+        this.updateCode(nextProps.code);
+    },
+
+  render: function() {
+    return <CodeMirror
+              value={this.state.code}
+              onChange={this.updateCode}
+              options={{
+                mode: 'javascript',
+                lineNumbers: true,
+                smartIndent: true,
+                tabSize:2}} />
+  }
+});
 
 class Transpiler extends React.Component {
     constructor(props) {
@@ -6,7 +39,8 @@ class Transpiler extends React.Component {
         this.state = {
             input: '',
             output: '',
-            err: ''
+            err: '',
+            code:''
         }
         this.handleUpdate = this.handleUpdate.bind(this);
     }
@@ -30,7 +64,8 @@ class Transpiler extends React.Component {
                     stage: 0,
                     loose: 'all'
                 }).code,
-                err: ''
+                err: '',
+                code: code
             })
         } catch (err) {
             this.setState({ err: err.message })
@@ -46,18 +81,16 @@ class Transpiler extends React.Component {
         console.clear()
         try {
            eval(msg)
-
           } catch (e) {
             console.log(e.message)
         }
-
     }
-
 
     render() {
         return (
             <div>
               <div className="header"> { this.state.err } </div>
+              <App code={this.state.code}/>
               <div className = "container" >
                 <textarea id = "text"
                 onChange = { this.handleUpdate }

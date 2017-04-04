@@ -643,7 +643,8 @@ pre {
   clear: both; }
 
 pre,
-textarea {
+textarea,
+.CodeMirror {
   float: left;
   height: 61vh;
   width: 50%;
