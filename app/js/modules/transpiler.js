@@ -1,6 +1,8 @@
 import React from 'react';
 var CodeMirror = require('react-codemirror');
 require('codemirror/mode/javascript/javascript');
+var regeneratorRuntime = require("babel-runtime/regenerator");
+
 
 
 class Transpiler extends React.Component {
@@ -30,10 +32,14 @@ class Transpiler extends React.Component {
                     loose: 'all'
                 }).code,
                 err: ''
+            },
+            ()=>{
+              this.console(this.state.output)
             })
         } catch (err) {
             this.setState({ err: err.message })
         }
+
     }
 
     updateCode(newCode) {
@@ -45,10 +51,8 @@ class Transpiler extends React.Component {
     babel(){
       return (e)=>{
         this.update(this.state.code);
-        this.console(this.state.output)
       }
     }
-
 
     console(msg) {
         console.clear()
@@ -86,9 +90,6 @@ class Transpiler extends React.Component {
                 tabSize:2
               }} />
               </div>
-
-
-
             </div>
 
         )

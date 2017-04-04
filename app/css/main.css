@@ -625,6 +625,7 @@ body {
   font-family: monospace; }
 
 .header {
+  position: relative;
   display: block;
   height: 5vh;
   overflow: auto;
@@ -666,6 +667,10 @@ textarea:focus {
 
 .example-enter {
   opacity: 0.01; }
+
+button {
+  position: absolute;
+  left: 0; }
 
 #console {
   width: 100%;
