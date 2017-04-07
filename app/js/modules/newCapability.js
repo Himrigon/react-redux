@@ -24,18 +24,39 @@ newCapability.defaultProps={
   es6:{
     _let:
 `let a = 2
- {let a = 3}`,
-    _const: 'const ARR = [5, 6];\n\rARR',
-    function_arrow:
-`
-function showMenu({title="Заголовок", width:w=100, height:h=200} = {}) {
-  return(title + ' ' + w + ' ' + h);
+
+{
+   let a = 3
 }
 
-let a = showMenu()
+console.log(a);
+
+var fs = [];
+  for(var i = 0; i < 10; i++) {
+    fs.push(function (){
+      console.log(i);
+    })
+  }
+
+fs.forEach(function(f){
+//  f();
+})
+`,
+    _const:
+`const ARR = {};
+ARR.foo='foo';
+
+console.log('value: ', ARR.foo);`,
+    function_arrow:
+`function showMenu({title="Заголовок", width:w=100, height:h=200} = {}) {
+  console.log(title + ' ' + w + ' ' + h);
+}
+
+//showMenu();
 
 
 let b = [1, 2].map(x => x * 2);
+//console.log(b);
 
 let group = {
   title: "Наш курс",
@@ -48,23 +69,38 @@ let group = {
   }
 }
 
-group.showList();`
-,
+//group.showList();
+`,
     spread:
-`let a=[3,4,5]
-//let b=[1,2,...a]
-let [firstName, lastName, ...rest] = "Сегезмунд Полиграфович Неактив-Болотский Вылазец".split(" ");
+`console.log(...[ 1, 2, 3]);
+
+let first = [ 1, 2, 3];
+let second = [ 4, 5, 6];
+first.push(...second);
+
+console.log(first);
+
+function addThreeThings( a, b, c){
+  let result = a + b + c;
+  console.log(result);
+}
+
+addThreeThings(...first);
 `,
     strings:
 `
-'//Blue Whale'.includes('blue');
-'//To be, or not to be, that is the question.'.endsWith('question.');
-'//To be, or not to be, that is the question.'.startWith('To');
-//'abc'.repeat(2);
+var salutation = "Hello";
+var greeting = salutation + ' world';
+
+console.log(greeting);
+
+//console.log('Blue Whale'.includes('blue'))
+//console.log('To be, or not to be, that is the question.'.endsWith('question.'))
+//console.log('To be, or not to be, that is the question.'.startsWith('To'))
+//console.log('abc'.repeat(2))
 `,
    ObjectPrototypes:
-`
-let name = 'Филимон';
+`let name = 'Филимон';
 let surname = 'surname'
 let gender = () => 'gender'
 let user={
@@ -76,8 +112,33 @@ let user={
 let user2={
   name: 'Венеамин',
   adress:'Утопская площадь 2б стр.4',
-  zip: 1111
+  zip: 1111,
+  sayHi(){
+    console.log(this.name)
+  }
 }
+
+user2.sayHi()
+
+let user3 = Object.assign({},user2,user);
+//user3.sayHi();
+//console.log(user3);
+
+let animal = {
+  walk() {
+    alert("I'm walking");
+  }
+};
+
+let rabbit = {
+  __proto__: animal,
+  walk() {
+    alert(super.walk);
+    super.walk();
+  }
+};
+
+//rabbit.walk();
 `,
     Classes:
 `
@@ -186,8 +247,13 @@ promise
 };
 let { foo:b, height } = a;
 let [firstName="Гость", lastName="Анонимный"] = [];
-`
 
+console.log('b: ', b);
+console.log('height: ',height);
+console.log('firstname: ', firstName);
+console.log('lastname: ', lastName);
+
+`
   }
 };
 export default newCapability;
