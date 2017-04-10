@@ -7,6 +7,9 @@ import Repos from './modules/Repos'
 import Repo from './modules/Repo'
 import NotFound from './modules/NotFound'
 import NewCapability from './modules/newCapability'
+import httpGet from './modules/httpGet'
+
+window.httpGet = httpGet
 
 render((
   <Router history={browserHistory}>

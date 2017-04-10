@@ -2,6 +2,7 @@ import React from 'react'
 import Transpiler from './transpiler'
 
 
+
 class newCapability extends React.Component{
   constructor(pros){
     super()
@@ -101,12 +102,13 @@ console.log(greeting);
 `,
    ObjectPrototypes:
 `let name = 'Филимон';
-let surname = 'surname'
-let gender = () => 'gender'
+let surname = 'surname';
+let gender = () => 'gender';
+
 let user={
   name,
   [surname]:'Уржумский',
-  [gender()]:'mail'
+  [gender()]:'male'
 }
 
 let user2={
@@ -115,10 +117,10 @@ let user2={
   zip: 1111,
   sayHi(){
     console.log(this.name)
-  }
+  },
 }
 
-user2.sayHi()
+//user2.sayHi()
 
 let user3 = Object.assign({},user2,user);
 //user3.sayHi();
@@ -141,43 +143,66 @@ let rabbit = {
 //rabbit.walk();
 `,
     Classes:
-`
-class User {
+`class User {
 
-  constructor(name) {
+  constructor(name,surname) {
     this.name = name;
+    this.surname = surname;
   }
 
   sayHi() {
    console.log(this.name)
   }
 
-}
+  get fullname(){
+   return
+  }
 
-let user = new User("Вася");
+  set fullname(newValue){
+    [this.name,this.surname] = newValue.split(' ');
+  }
 
-class ChildUser extends User{
-  sayHi(){
-    super.sayHi()
-    return 'from ChilDuser'
+  static createUser(){
+    return new User('Вельвет','Вельветович')
   }
 }
 
-new ChildUser('Петя');
+let vasya = new User("Вася","Васин");
+vasya.fullname='Петя Петин';
+let velvet = User.createUser();
+
+//console.log(vasya.fullname)
+//console.log(new User("Вася","Васин").fullname);
+//console.log(velvet.fullname)
+
+class ChildUser extends User{
+  constructor(){
+    super('Петя')
+  }
+  sayHi(){
+    super.sayHi()
+    alert('from childUser')
+  }
+}
+
+//console.log(ChildUser.prototype.__proto__ == User.prototype)
+//new ChildUser().sayHi();
 `,
 Symbol:
-`
-let sym = Symbol("name");
-sym.toString();
-// Symbol("name") == Symbol("name")
-//let user = {
-//  isAdmin: 'Admin',
-//  name: "Вася",
-//  age: 30,
-//  [Symbol.for("isAdmin")]: true
-//};
-//Object.keys(user)
-//user[Symbol.for("isAdmin")]
+`let sym = Symbol("name");
+let name = Symbol.for("name");
+let user = {
+  isAdmin: 'Admin',
+  name: "Вася",
+  age: 30,
+  [Symbol.for("isAdmin")]: true
+};
+
+//console.log(sym.toString())
+//console.log( Symbol("name") == Symbol("name"));
+//console.log(Symbol.for("name") == name);
+//console.log(Object.keys(user));
+//console.log(user[Symbol.for("isAdmin")]);
 `,
     SetMap:
 `
@@ -216,15 +241,50 @@ function* generateSequence() {
 
 let generator = generateSequence();
 
-for(let value of generator) {
-  alert(value);}
+let one = generator.next();
+let two = generator.next();
+
+//console.log(JSON.stringify(one));
+//console.log(JSON.stringify(two));
+//console.log(JSON.stringify(generator.next()));
+
+function* gen(){
+
+  let promise = yield new Promise(
+    resolve =>setTimeout(
+      ()=>resolve('/js/test/user.json'),3000)
+  )
+
+  let result = yield httpGet(promise);
+
+  return результат:
+}
+
+
+function execute(generator, yieldValue) {
+
+  let next = generator.next(yieldValue);
+
+  if (!next.done) {
+    next.value.then(
+      result => execute(generator, result),
+      err => generator.throw(err)
+    );
+  } else {
+    console.log(next.value);
+  }
+
+}
+
+execute(gen());
+
+
     `,
     Promise:
-`
-let promise = new Promise((resolve, reject) => {
+`let promise = new Promise((resolve, reject) => {
 
   setTimeout(() => {
-    resolve("result");
+    resolve("user");
   }, 1000);
 });
 
@@ -232,14 +292,88 @@ promise
   .then(
     result => {
       console.log("Fulfilled: " + result);
+      return result
     },
     error => {
-      console.log("Rejected: " + error); // error - аргумент reject
+      console.log("Rejected: " + error);
     }
-  );
+  ).then(
+    result => {
+      return httpGet('/js/test/.json');
+    }
+  ).then(
+    response=>{
+      console.log(JSON.parse(response)["user"])
+    }
+  ).catch(
+    error => {
+      console.log("catch error: ", error)
+    }
+  )
+
+let urls = [
+  '/js/test/user.json',
+  '/js/test/promise.json'
+];
+
+Promise.all( urls.map(httpGet) )
+  .then(
+    results => console.log(results),
+    error => alert("Ошибка: " + error.message)
+       );
 `,
     Modules:'',
-    Proxy:'',
+    Proxy:
+`
+let dictionary = {
+  'Hello': 'Привет',
+  'Bye': 'Пока'
+};
+
+let dictionaryGet = new Proxy(dictionary, {
+  get(target, phrase) {
+    if (phrase in target) {
+      return target[phrase];
+    } else {
+      console.log('No phrase: ',phrase);
+      return phrase;
+    }
+  }
+})
+
+//console.log(dictionaryGet['Hello'])
+//console.log(dictionaryGet['Hell'])
+
+let dictionaryHas = new Proxy(dictionary, {
+  has(target, phrase) {
+    return true;
+  }
+});
+
+//console.log("BlaBlaBla" in dictionaryHas);
+let dictionaryDelete = new Proxy(dictionary, {
+  deleteProperty(target, phrase) {
+    return true;
+  }
+});
+delete dictionaryDelete['Hello'];
+
+//console.log('Hello' in dictionary)
+
+function sum(a, b) {
+  return a + b;
+}
+
+let proxy = new Proxy(sum, {
+
+  apply: function(target, thisArg, argumentsList) {
+    console.log('Буду вычислять сумму: ',argumentsList);
+    return target.apply(thisArg, argumentsList);
+  }
+});
+
+//console.log( proxy(1, 2) );
+`,
     Assignment_Destructuring:
 `let a = {
   foo: 24,
