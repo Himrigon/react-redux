@@ -49,28 +49,58 @@ ARR.foo='foo';
 
 console.log('value: ', ARR.foo);`,
     function_arrow:
-`function showMenu({title="Заголовок", width:w=100, height:h=200} = {}) {
-  console.log(title + ' ' + w + ' ' + h);
+`function showMenu(title = "Без заголовка", width = 100, height = 200) {
+  console.log(title + ' ' + width + ' ' + height);
+}
+
+let option={
+title:"Блок"
 }
 
 //showMenu();
 
 
+function f() {}
+
+let g = function () {};
+
+let user = {
+  sayHi: function() {}
+};
+//console.log(f.name,g.name,user.sayHi.name);
+
+
 let b = [1, 2].map(x => x * 2);
-//console.log(b);
+
 
 let group = {
-  title: "Наш курс",
-  students: ["Вася", "Петя", "Даша"],
+  title: "Корзина",
+  items: ["Персик", "Ложка", "Гусь", "Лепешка"],
 
   showList: function() {
-    this.students.forEach(
-      student => console.log(this.title + ': ' + student)
+    this.items.forEach(
+      item => console.log(this.title + ': ' + item)
     )
   }
 }
 
 //group.showList();
+
+function f() {
+  let showArg = () => console.log(arguments[0]);
+  showArg();
+}
+
+//f(1)
+
+function decorator(f,ms){
+ return function(){
+  setTimeout (()=> f.apply(this,arguments),ms)
+ }
+}
+function go(name){
+ console.log("let's go ",name);
+}
 `,
     spread:
 `console.log(...[ 1, 2, 3]);
@@ -375,18 +405,23 @@ let proxy = new Proxy(sum, {
 //console.log( proxy(1, 2) );
 `,
     Assignment_Destructuring:
-`let a = {
+`let [firstName="Гость", lastName="Анонимный"] = ["Николай","Кустицкий"];
+
+let [first, last, ...rest] = "Пончик Морковка Яичко Коровка".split(" ");
+
+let a = {
   foo: 24,
   height:2
 };
-let { foo:b, height } = a;
-let [firstName="Гость", lastName="Анонимный"] = [];
 
-console.log('b: ', b);
-console.log('height: ',height);
-console.log('firstname: ', firstName);
-console.log('lastname: ', lastName);
+let { foo:b, height, time=23 } = a;
 
+
+
+//console.log('firstname: ', firstName,'lastname: ',lastName);
+//console.log(rest)
+
+//console.log('height: ',height,'b: ', b,'time: ',time);
 `
   }
 };
