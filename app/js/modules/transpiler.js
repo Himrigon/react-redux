@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react'
 var CodeMirror = require('react-codemirror');
 require('codemirror/mode/javascript/javascript');
 var regeneratorRuntime = require("babel-runtime/regenerator");

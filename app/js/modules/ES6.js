@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component} from 'react'
 import NavLink from './NavLink'
 
-export default React.createClass({
+class ES6 extends React.Component{
   render() {
     return(
       <div>
@@ -15,6 +15,7 @@ export default React.createClass({
           <li className="menu-list__item"><NavLink to="/es6/ObjectPrototypes">Object and prototypes</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/Classes">Classes</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/Symbol">Symbol</NavLink></li>
+          <li className="menu-list__item"><NavLink to="/es6/Iterator">Iterator</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/SetMap">Map WeakMap</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/Promise">Promise</NavLink></li>
           <li className="menu-list__item"><NavLink to="/es6/Generators">Generators</NavLink></li>
@@ -25,4 +26,6 @@ export default React.createClass({
       )
 
   }
-})
+}
+
+export default ES6;

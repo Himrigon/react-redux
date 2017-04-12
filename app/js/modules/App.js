@@ -1,9 +1,9 @@
 import { Link } from 'react-router'
-import React from 'react';
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom';
 import NavLink from './NavLink';
 
-export default React.createClass({
+export default class App extends React.Component{
   render() {
     return (
       <div className="route">
@@ -18,4 +18,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Transpiler from './transpiler'
 
 
@@ -118,6 +118,50 @@ function addThreeThings( a, b, c){
 
 addThreeThings(...first);
 `,
+ Iterator:
+ `let arr = [1, 2, 3];
+
+for (let value of arr) {
+  //console.log(value);
+}
+
+for (let char of "Здрасьте") {
+  //console.log(char);
+}
+
+
+let range = {
+  from: 3,
+  to: 10
+}
+
+range[Symbol.iterator] = function() {
+
+  let current = this.from;
+  let last = this.to;
+
+  return {
+    next() {
+      if (current <= last) {
+        return {
+          done: false,
+          value: current++
+        };
+      } else {
+        return {
+          done: true
+        };
+      }
+    }
+
+  }
+};
+
+for (let num of range) {
+  //console.log(num); // 1, затем 2, 3, 4, 5
+}
+ `
+,
     strings:
 `
 var salutation = "Hello";
@@ -125,10 +169,17 @@ var greeting = salutation + ' world';
 
 console.log(greeting);
 
+
+function func(string,...value){
+  console.log(string);
+  console.log(value);
+}
+
 //console.log('Blue Whale'.includes('blue'))
 //console.log('To be, or not to be, that is the question.'.endsWith('question.'))
 //console.log('To be, or not to be, that is the question.'.startsWith('To'))
 //console.log('abc'.repeat(2))
+
 `,
    ObjectPrototypes:
 `let name = 'Филимон';
@@ -239,9 +290,13 @@ let user = {
 let map = new Map();
 
 map.set('1', 'str1')
-   .set(1, 'num1')
+   .set(7, 'num7')
    .set(true, 'bool1');
 
+console.log(map.get(7));
+
+let user = { name: "Вася" };
+map.set(user,)
 for (let keys of map.keys()){
   //console.log keys
 }
@@ -261,6 +316,10 @@ let fruit = [
 let weakMap = new WeakMap();
 
 weakMap[fruit[1]] = 'green';
+
+//console.log((weakMap[fruit[1]]));
+
+
 `,
     Generators:`
 function* generateSequence() {
@@ -422,6 +481,27 @@ let { foo:b, height, time=23 } = a;
 //console.log(rest)
 
 //console.log('height: ',height,'b: ', b,'time: ',time);
+`,
+exponent:
+`
+let squared = 3 ** 2;
+
+let num = 3;
+num **= 2;
+console.log(num);
+`,
+includes:
+`
+console.log(['a', 'b', 'c'].includes('a'));
+console.log(['a', 'b', 'c'].includes('d'));
+
+let arr = [1,2,3,4]
+
+//console.log(arr.includes(2))
+//console.log(arr.indexOf(2))
+
+//console.log([NaN].includes(NaN))
+//console.log([NaN].indexOf(NaN))
 `
   }
 };
